@@ -1,0 +1,39 @@
+package cn.membersheep.service.ex;
+
+/**
+ * �ļ�δ�ϴ�
+ * @author tarena
+ *
+ */
+public class RequestArgumentException extends ServiceException{
+
+	private static final long serialVersionUID = 7010868404336943576L;
+
+	public RequestArgumentException() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public RequestArgumentException(String message, Throwable cause, boolean enableSuppression,
+			boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+		// TODO Auto-generated constructor stub
+	}
+
+	public RequestArgumentException(String message, Throwable cause) {
+		super(message, cause);
+		// TODO Auto-generated constructor stub
+	}
+
+	public RequestArgumentException(String message) {
+		super(message);
+		// TODO Auto-generated constructor stub
+	}
+
+	public RequestArgumentException(Throwable cause) {
+		super(cause);
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+}
