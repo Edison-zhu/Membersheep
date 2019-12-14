@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
 <!-- namespace：映射的接口的全名 -->
-<mapper namespace="cn.membersheep.mappers.UserMapper">
-
-
+<mapper namespace="cn.membersheep.mappers.AddressMapper">
 	<!-- 根据执行的SQL种类选择节点 -->
 	<!-- id：抽象方法的名称 -->
 	<!-- parameterType：抽象方法的参数类型 -->
 	<!-- SQL语句中的参数使用#{}框住User类中的属性名 -->
 	<!-- SQL语句不需要使用分号表示结束 -->
-	<insert id="insert" parameterType="cn.membersheep.entity.User" useGeneratedKeys="true" keyProperty="id " >
-		INSERT INTO t_user (
-			id,username,password,avatar,gender,phone,email,createtime,createuser,modifiedtime,modifieduser,salt,isdelete
-		) VALUES (
-			#{id},#{username},#{password},#{avatar},#{gender},#{phone},#{email},#{createtime},#{createuser},#{modifiedtime},#{modifieduser},#{salt},#{isdelete}
+	<insert id="insert" parameterType="cn.membersheep.entity.Address" useGeneratedKeys="true" keyProperty="id " >
+		INSERT INTO t_address (
+			uid,recvName,recvProvince,recvCity,recvArea,recvDistrict,recvAddress,recvPhone,recvTel,recvZip,
+			recvTag,isDefault
+		)VALUES(
+			#{uid},#{recvName},#{recvProvince},#{recvCity},#{recvArea},#{recvDistrict},#{recvAddress},#{recvPhone},
+			#{recvTel},#{recvZip},#{recvTag},#{isDefault}
 		)
 	</insert>
-<select id="findUserByUsername" resultType="cn.membersheep.entity.User" parameterType="String">
-SELECT id,username,password,salt
-FROM t_user
+<select id="getCountByUid" resultType="java.lang.Integer">
+SELECT COUNT(id)
+FROM t_address
 WHERE
-username=#{username}
+uid=#{uid}
 </select>
-	<select id="findUserById" resultType="cn.membersheep.entity.User">
+	<select id="findUserById" resultType="cn.membersheep.entity.Address">
 SELECT password,salt,username
 FROM t_user
 WHERE

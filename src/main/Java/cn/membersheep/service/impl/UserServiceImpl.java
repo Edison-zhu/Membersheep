@@ -13,10 +13,20 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.UUID;
 
-@Service("userService")
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+
+    /**
+     * 用户注册方法
+     * @param user 返回成功的用户数据
+     * @return
+     * @throws UsernameConflictException
+     * @throws InsertDataException
+     * @throws UsernameFormartException
+     * @throws PasswordFormartException
+     */
     @Override
     public User reg(User user) throws UsernameConflictException, InsertDataException,UsernameFormartException, PasswordFormartException{
         if (!TextValidator.checkUsername(user.getUsername())){
@@ -34,6 +44,14 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    /**
+     * 用户登录方法
+     * @param username
+     * @param password
+     * @return
+     * @throws UsernameConflictException
+     * @throws PasswordNotMatchException
+     */
     @Override
     public User login(String username, String password) throws UsernameConflictException, PasswordNotMatchException {
         if (!TextValidator.checkUsername(username)){
@@ -57,6 +75,17 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("尝试登陆的用户名"+username+"不存在");
         }
     }
+
+    /**
+     * 修改密码
+     * @param id
+     * @param oldPassword
+     * @param newPassword
+     * @throws UserNotFoundException
+     * @throws PasswordNotMatchException
+     * @throws PasswordFormartException
+     * @throws UpdateDateException
+     */
     public void changePassword(Integer id, String oldPassword, String newPassword)
             throws UserNotFoundException, PasswordNotMatchException, PasswordFormartException,UpdateDateException {
         User result = findUserById(id);
@@ -76,20 +105,27 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException("³¢ÊÔÐÞ¸ÄµÄÓÃ»§Êý¾Ý²»´æÔÚ");
         }
     }
+
+    /**
+     * 修改用户信息
+     * @param user
+     * @throws UpdateDateException
+     * @throws UserNotFoundException
+     */
     public void changeInfo(User user) throws UpdateDateException,UserNotFoundException{
-        //ÅÐ¶ÏÓÃ»§idÊÇ·ñ´æÔÚ
+
         if(user.getId() == null){
             throw new UpdateDateException("更新用户信息错误！");
         }
         User result = findUserById(user.getId());
-        //ÅÐ¶ÏÓÃ»§Êý¾ÝÊÇ·ñ´æÔÚÊý¾Ý±íÖÐ
+
         if(result == null){
             throw new UserNotFoundException("尝试访问用户数据不存在");
         }
-        //²¹È«ÐèÒª¸üÐÂµÄÊý¾Ý
+
         user.setModifieduser(result.getUsername());
         user.setModifiedtime(new Date());
-        //Ö´ÐÐ¸üÐÂÓÃ»§ÐÅÏ¢²Ù×÷
+
         updateInfo(user);
     }
 
@@ -173,7 +209,7 @@ public class UserServiceImpl implements UserService {
     private Integer updateInfo(User user) throws UpdateDateException{
         Integer rows = userMapper.updateInfo(user);
         if(rows != 1){
-            throw new UpdateDateException("¸üÐÂÐÅÏ¢Ê±·¢Éú´íÎó");
+            throw new UpdateDateException("更新用户信息出错");
         }
         return rows;
     }

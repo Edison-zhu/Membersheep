@@ -15,15 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * HTML���ʹ�����
+ * 过滤器类
  * @author tarena
  *
  */
 public class HtmlAccessFilter implements Filter{
 	
-	/**
-	 * ������
-	 */
+
 	private List<String> whiteList = new ArrayList<String>();
 	
 	public void init(FilterConfig arg0) throws ServletException {
@@ -41,21 +39,21 @@ public class HtmlAccessFilter implements Filter{
 		HttpServletResponse response = (HttpServletResponse) arg1;
 		String uri = request.getRequestURI();
 		String fileName = uri.substring(uri.lastIndexOf("/")+1);
-		System.out.println("当前请求的页面"+fileName);
+		System.out.println("过滤器加载路径"+fileName);
 
 		//如果无需登录直接放行
 		if(whiteList.contains(fileName)){
-			// ����,����ִ�к����Ĺ���
+
 			arg2.doFilter(request, response);
 			return;
 		}
 		HttpSession session = request.getSession();
-		//�ж��Ƿ���session
+
 		if(session.getAttribute("uid") != null){
 			arg2.doFilter(request, response);
 			return;
 		}
-		//�ض��򵽵�¼ҳ��
+
 		response.sendRedirect("login.html");
 	}
 

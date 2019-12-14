@@ -15,7 +15,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class SpringTestCase {
 
     private AbstractApplicationContext ac;
-    private UserService userService;
+    private AddressService addressService;
     @Test
     public void insert() {
         try {
@@ -55,14 +55,18 @@ public class SpringTestCase {
         }
     }
 
-
+    @Test
+    public void addnew(){
+        Address address = new Address();
+        address.set
+    }
 
     @Before
     public void doBefore() {
         ac = new ClassPathXmlApplicationContext(
                 "spring-dao.xml","spring-service.xml");
 
-        userService = ac.getBean("userService",UserService.class);
+        userService = ac.getBean("addressService",addressService.class);
     }
 
     @After

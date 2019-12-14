@@ -1,10 +1,11 @@
 package cn.membersheep.mappers;
 
 import cn.membersheep.entity.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
+@Mapper
 public interface UserMapper {
     /**
      * 想用户表数据插入用户信息
@@ -29,7 +30,6 @@ public interface UserMapper {
     User findUserById(Integer id);
 
     /**
-     * ¸ù¾ÝidÐÞ¸ÄÓÃ»§ÃÜÂë
      * @param id ÓÃ»§id
      * @param password ÓÃ»§ÃÜÂë
      * @return ÐÞ¸ÄµÄÌõÊý

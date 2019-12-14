@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<!-- namespace：映射的接口的全名 -->
+<mapper namespace="cn.membersheep.mappers.DistrictMapper">
+	<!-- 根据执行的SQL种类选择节点 -->
+	<!-- id：抽象方法的名称 -->
+	<!-- parameterType：抽象方法的参数类型 -->
+	<!-- SQL语句中的参数使用#{}框住User类中的属性名 -->
+	<!-- SQL语句不需要使用分号表示结束 -->
+<select id="findDistrictByCode" resultType="cn.membersheep.entity.District">
+SELECT id,parent,code,name
+FROM t_dict_district
+WHERE
+code=#{code}
+</select>
+<!--	/**-->
+<!--	* @Author 朱燕冰-->
+<!--	* @Description: //TODO 获取省市区列表-->
+<!--	* @Date 下午3:54 2019/12/14-->
+<!--	* @Param [parent]-->
+<!--	* @return java.util.List<cn.membersheep.entity.District>-->
+<!--	List <District> getList(String parent);-->
+<!--	**/-->
+	<select id="getList" resultType="cn.membersheep.entity.District">
+		SELECT id,parent,code,name FROM t_dict_district where parent=#{parent}
+	</select>
+
+</mapper>
+
+
+
+
+
+
+

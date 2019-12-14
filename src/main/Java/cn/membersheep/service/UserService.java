@@ -12,10 +12,52 @@ public interface UserService {
      * @throws UsernameConflictException 用户名被占用
      */
     User reg(User user)throws UsernameConflictException, InsertDataException;
+
+    /**
+     * 用户登录
+     * @param username
+     * @param password
+     * @return
+     * @throws UsernameConflictException
+     * @throws PasswordNotMatchException
+     * @throws UsernameFormartException
+     * @throws PasswordFormartException
+     */
     User login(String username,String password)throws UsernameConflictException,PasswordNotMatchException, UsernameFormartException,PasswordFormartException;
+
+    /**
+     * 修改密码
+     * @param id
+     * @param oldPassword
+     * @param newPassword
+     * @throws UserNotFoundException
+     * @throws PasswordNotMatchException
+     * @throws PasswordFormartException
+     * @throws UpdateDateException
+     */
     void changePassword(Integer id, String oldPassword, String newPassword)
             throws UserNotFoundException, PasswordNotMatchException, PasswordFormartException,UpdateDateException;
+
+    /**
+     * 修改信息
+     * @param user
+     * @throws UpdateDateException
+     * @throws UserNotFoundException
+     */
     void changeInfo(User user)throws UpdateDateException,UserNotFoundException;
+
+    /**
+     * 根据用户名查找
+     * @param id
+     * @return
+     */
     User findUserById(Integer id);
+
+    /**
+     * 修改头像
+     * @param id
+     * @param avatar
+     * @throws UserNotFoundException
+     */
     void changeAvatar(Integer id,String avatar) throws UserNotFoundException;
 }

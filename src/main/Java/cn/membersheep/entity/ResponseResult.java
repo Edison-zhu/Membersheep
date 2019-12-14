@@ -1,9 +1,9 @@
 package cn.membersheep.entity;
 
 public class ResponseResult <T>{
-    private Integer state = 200;
-    private String message;
-    private T data;
+    private Integer state = 200;//操作状态
+    private String message;//提示信息
+    private T data;//数据
 
     public ResponseResult() {
         super();

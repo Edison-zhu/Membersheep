@@ -25,6 +25,7 @@ public abstract class BaseController {
             return new ResponseResult<Void>(403,e);
         }
         else if (e instanceof InsertDataException){
+            //插入数据异常
             return new ResponseResult<Void>(501,e);
         }
         return null;

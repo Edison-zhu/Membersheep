@@ -43,7 +43,7 @@ public class UserController extends BaseController{
     }
 
     //登录
-    @CrossOrigin(origins = "*", maxAge = 3600)
+    //@CrossOrigin(origins = "*", maxAge = 3600)
     @RequestMapping(value = "/hand_login.do",method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult<Void>handLogin(@RequestParam("username")String username, @RequestParam("password")String password, HttpSession session){
@@ -58,6 +58,14 @@ public class UserController extends BaseController{
         session.setAttribute("username",user.getUsername());
         return new ResponseResult<>();
     }
+
+    /**
+     * 修改密码方法
+     * @param oldPassword
+     * @param newPassword
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/change_password.do", method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult<Void> handle_changePassword(@RequestParam("old_password") String oldPassword,
@@ -70,6 +78,11 @@ public class UserController extends BaseController{
         return new ResponseResult<Void>();
     }
 
+    /** 修改个人信息方法
+     * @param user
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/change_info.do", method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult<Void> handle_changeInfo(User user, HttpSession session) {
